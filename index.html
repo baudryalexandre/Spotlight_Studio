@@ -4,287 +4,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu avec onglets et preview</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Menu gauche */
-        .menu {
-            width: 280px;
-            background: #f5f5f5;
-            border-right: 2px solid #ccc;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
-
-        .menu p {
-            width: 13%;
-            position: fixed;
-            bottom: 0;
-            display: flex;
-            font-size: 0.9rem;
-            align-items: center;
-        }
-
-        h1 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        /* Recherche */
-        .search-box {
-            margin-bottom: 15px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Filtres */
-        .filters {
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .filters label {
-            display: block;
-            margin-bottom: 5px;
-            cursor: pointer;
-        }
-
-        /* Accordéon */
-        .accordion {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            background: #007BFF;
-            color: #fff;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .accordion-header:hover {
-            background: #0056b3;
-        }
-
-        .accordion-content {
-            display: none;
-            background: #fafafa;
-            padding: 10px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            margin: 10px 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 6px 10px;
-            margin-right: 6px;
-            background: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-        }
-
-        .download {
-            background: #28a745;
-        }
-
-        .download:hover {
-            background: #1e7e34;
-        }
-
-        /* Panneau preview à droite */
-        .preview-panel {
-            flex: 1;
-            background: #fff;
-            display: none;
-            flex-direction: column;
-        }
-
-        .preview-panel iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
-        }
-
-        .preview-header {
-            background: #007BFF;
-            color: #fff;
-            padding: 8px 12px;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-btn {
-            background: #dc3545;
-            border: none;
-            padding: 6px 10px;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            background: #a71d2a;
-        }
-    </style>
+    <title>Spotlight Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
-    <!-- Menu gauche -->
-    <div class="menu">
-        <h1>Menu principal</h1>
-
-        <!-- Barre de recherche -->
-        <div class="search-box">
-            <input type="text" id="search" placeholder="Rechercher...">
-        </div>
-
-        <!-- Filtres -->
-        <div class="filters">
-            <label><input type="checkbox" class="filter" value="stable" checked> Stable</label>
-            <label><input type="checkbox" class="filter" value="proto" checked> Prototypes</label>
-            <label><input type="checkbox" class="filter" value="v" checked> Versions</label>
-        </div>
-
-        <!-- Accordéon -->
-        <div class="accordion">
-            <div class="accordion-header">Salon V1</div>
-            <div class="accordion-content">
-                <ul>
-                    <li data-tags="stable v1">
-                        <button class="btn" data-src="salon_de_coiffure/index.html">Voir V1 stable</button>
-                        <a href="salon_de_coiffure/index.html" target="_blank" class="btn">Ouvrir</a>
-                    </li>
-                    <li data-tags="proto v1">
-                        <button class="btn" data-src="tmp_proto/salon_de_coiffure_V1_proto/index.html">Voir V1
-                            proto</button>
-                        <a href="download?folder=tmp_proto/salon_de_coiffure_V1_proto"
-                            class="btn download">Télécharger</a>
-                    </li>
-                </ul>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fa-solid fa-layer-group"></i> Spotlight Studio</span>
             </div>
         </div>
 
-        <div class="accordion">
-            <div class="accordion-header">Salon V2</div>
-            <div class="accordion-content">
-                <ul>
-                    <li data-tags="stable v2">
-                        <button class="btn" data-src="homepage/v2/index.html">Voir V2 stable</button>
-                        <a href="homepage/v2/index.html" download class="btn download">Télécharger</a>
-                    </li>
-                </ul>
+        <div class="sidebar-content">
+            <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="search" placeholder="Rechercher une version...">
+            </div>
+
+            <div class="filters">
+                <label class="filter-chip">
+                    <input type="checkbox" class="filter" value="stable" checked>
+                    <span>Stable</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" class="filter" value="proto" checked>
+                    <span>Proto</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" class="filter" value="v" checked>
+                    <span>Versions</span>
+                </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="project-list">
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span><i class="fa-solid fa-folder"></i> Salon V1</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li data-tags="stable v1">
+                                <div class="version-row">
+                                    <span class="version-name">V1 Stable</span>
+                                    <div class="actions">
+                                        <button class="btn-icon view" data-src="salon_de_coiffure/index.html" title="Voir">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <a href="salon_de_coiffure/index.html" target="_blank" class="btn-icon external" title="Nouvel onglet">
+                                            <i class="fa-solid fa-up-right-from-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-tags="proto v1">
+                                <div class="version-row">
+                                    <span class="version-name">V1 Prototype</span>
+                                    <div class="actions">
+                                        <button class="btn-icon view" data-src="tmp_proto/salon_de_coiffure_V1_proto/index.html" title="Voir">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <a href="/download?folder=tmp_proto/salon_de_coiffure_V1_proto" class="btn-icon download" title="Télécharger">
+                                            <i class="fa-solid fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span><i class="fa-solid fa-folder"></i> Salon V2</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li data-tags="stable v2">
+                                <div class="version-row">
+                                    <span class="version-name">V2 Stable</span>
+                                    <div class="actions">
+                                        <button class="btn-icon view" data-src="homepage/v2/index.html" title="Voir">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <a href="homepage/v2/index.html" download class="btn-icon download" title="Télécharger">
+                                            <i class="fa-solid fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span><i class="fa-solid fa-folder"></i> Salon V3</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li data-tags="stable v3">
+                                <div class="version-row">
+                                    <span class="version-name">V3 Stable</span>
+                                    <div class="actions">
+                                        <button class="btn-icon view" data-src="homepage/v3/index.html" title="Voir">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <a href="homepage/v3/index.html" download class="btn-icon download" title="Télécharger">
+                                            <i class="fa-solid fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="accordion">
-            <div class="accordion-header">Salon V3</div>
-            <div class="accordion-content">
-                <ul>
-                    <li data-tags="stable v3">
-                        <button class="btn" data-src="homepage/v3/index.html">Voir V3 stable</button>
-                        <a href="homepage/v3/index.html" download class="btn download">Télécharger</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="sidebar-footer">
+            <p>&copy; 2025 Alexandre BAUDRY</p>
         </div>
-        <p>&copy; 2025 Tous droits réservés | Créer par Alexandre BAUDRY</p>
     </div>
 
-    <!-- Zone preview à droite -->
-    <div class="preview-panel" id="preview-panel">
-        <div class="preview-header">
-            <span id="preview-title">Aperçu</span>
-            <button class="close-btn" id="close-preview">Fermer</button>
+    <div class="main-area">
+        <div id="empty-state">
+            <i class="fa-solid fa-laptop-code"></i>
+            <h2>Sélectionnez une version</h2>
+            <p>Choisissez un projet dans le menu de gauche pour afficher l'aperçu.</p>
         </div>
-        <iframe src=""></iframe>
+
+        <div class="preview-panel" id="preview-panel">
+            <div class="preview-header">
+                <div class="preview-info">
+                    <span class="badge">Live Preview</span>
+                    <span id="preview-title">Titre du projet</span>
+                </div>
+                <button class="close-btn" id="close-preview">
+                    <i class="fa-solid fa-xmark"></i> Fermer
+                </button>
+            </div>
+            <div class="iframe-container">
+                <iframe src=""></iframe>
+            </div>
+        </div>
     </div>
 
-    <script>
-        const buttons = document.querySelectorAll("button[data-src]");
-        const panel = document.getElementById("preview-panel");
-        const iframe = panel.querySelector("iframe");
-        const title = document.getElementById("preview-title");
-        const closeBtn = document.getElementById("close-preview");
+    <script src="/assets/js/script.js"></script>
 
-        // ouverture preview
-        buttons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                iframe.src = btn.getAttribute("data-src");
-                title.textContent = "Aperçu : " + btn.textContent;
-                panel.style.display = "flex";
-            });
-        });
-
-        // fermer preview
-        closeBtn.addEventListener("click", () => {
-            panel.style.display = "none";
-            iframe.src = "";
-        });
-
-        // recherche + filtres
-        const searchInput = document.getElementById("search");
-        const filters = document.querySelectorAll(".filter");
-        const items = document.querySelectorAll("li[data-tags]");
-
-        function filterMenu() {
-            const search = searchInput.value.toLowerCase();
-            const activeFilters = Array.from(filters).filter(f => f.checked).map(f => f.value);
-
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                const tags = item.getAttribute("data-tags").split(" ");
-                const matchSearch = text.includes(search);
-                const matchFilter = tags.some(tag => activeFilters.includes(tag));
-                item.style.display = (matchSearch && matchFilter) ? "list-item" : "none";
-            });
-        }
-
-        searchInput.addEventListener("input", filterMenu);
-        filters.forEach(f => f.addEventListener("change", filterMenu));
-
-        // Accordéon
-        const accordions = document.querySelectorAll(".accordion-header");
-        accordions.forEach(header => {
-            header.addEventListener("click", () => {
-                const content = header.nextElementSibling;
-                content.style.display = (content.style.display === "block") ? "none" : "block";
-            });
-        });
-    </script>
 </body>
-
 </html>
