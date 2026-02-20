@@ -2,62 +2,93 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spotlight Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
 <body>
-    <div class="sidebar">
+
+    <!-- Overlay mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ══════════ SIDEBAR ══════════ -->
+    <aside class="sidebar" id="sidebar">
+
         <div class="sidebar-header">
             <div class="logo">
-                <i class="fa-solid fa-layer-group"></i> Spotlight Studio</span>
+                <div class="logo-mark">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="logo-text">
+                    Spotlight<span>Studio</span>
+                </div>
             </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer le menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
 
         <div class="sidebar-content">
+
             <div class="search-box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="search" placeholder="Rechercher une version...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search" placeholder="Rechercher une version…" autocomplete="off" />
             </div>
 
+            <div class="filter-label">Filtrer par</div>
             <div class="filters">
                 <label class="filter-chip">
-                    <input type="checkbox" class="filter" value="stable" checked>
-                    <span>Stable</span>
+                    <input type="checkbox" class="filter" value="stable" checked />
+                    <span><i class="fa-solid fa-circle-check"></i> Stable</span>
                 </label>
                 <label class="filter-chip">
-                    <input type="checkbox" class="filter" value="proto" checked>
-                    <span>Proto</span>
+                    <input type="checkbox" class="filter" value="proto" checked />
+                    <span><i class="fa-solid fa-flask"></i> Proto</span>
                 </label>
                 <label class="filter-chip">
-                    <input type="checkbox" class="filter" value="v" checked>
-                    <span>Versions</span>
+                    <input type="checkbox" class="filter" value="v" checked />
+                    <span><i class="fa-solid fa-code-branch"></i> Versions</span>
                 </label>
             </div>
 
             <div class="divider"></div>
+            <div class="section-label">
+                <i class="fa-solid fa-folder-tree"></i> Projets
+            </div>
 
             <div class="project-list">
-                
+
+                <!-- Salon V1 -->
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <span><i class="fa-solid fa-folder"></i> Salon V1</span>
+                        <div class="folder-icon"><i class="fa-solid fa-folder"></i></div>
+                        <span class="folder-name">Salon V1</span>
+                        <span class="count">2</span>
                         <i class="fa-solid fa-chevron-down arrow"></i>
                     </div>
                     <div class="accordion-content">
                         <ul>
                             <li data-tags="stable v1">
                                 <div class="version-row">
-                                    <span class="version-name">V1 Stable</span>
+                                    <div class="version-meta">
+                                        <span class="tag tag-stable"><i class="fa-solid fa-circle-check"></i>
+                                            Stable</span>
+                                        <span class="version-name">Stable</span>
+                                    </div>
                                     <div class="actions">
-                                        <button class="btn-icon view" data-src="salon_de_coiffure/index.html" title="Voir">
+                                        <button class="btn-icon view" data-src="salon_de_coiffure/index.html"
+                                            data-title="Salon V1 — Stable" title="Voir l'aperçu">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <a href="salon_de_coiffure/index.html" target="_blank" class="btn-icon external" title="Nouvel onglet">
+                                        <a href="salon_de_coiffure/index.html" target="_blank" class="btn-icon external"
+                                            title="Ouvrir dans un nouvel onglet">
                                             <i class="fa-solid fa-up-right-from-square"></i>
                                         </a>
                                     </div>
@@ -65,12 +96,18 @@
                             </li>
                             <li data-tags="proto v1">
                                 <div class="version-row">
-                                    <span class="version-name">V1 Prototype</span>
+                                    <div class="version-meta">
+                                        <span class="tag tag-proto"><i class="fa-solid fa-flask"></i> Proto</span>
+                                        <span class="version-name">V1 — Prototype</span>
+                                    </div>
                                     <div class="actions">
-                                        <button class="btn-icon view" data-src="tmp_proto/salon_de_coiffure_V1_proto/index.html" title="Voir">
+                                        <button class="btn-icon view"
+                                            data-src="tmp_proto/salon_de_coiffure_V1_proto/index.html"
+                                            data-title="Salon V1 — Prototype" title="Voir l'aperçu">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <a href="/download?folder=tmp_proto/salon_de_coiffure_V1_proto" class="btn-icon download" title="Télécharger">
+                                        <a href="/download?folder=tmp_proto/salon_de_coiffure_V1_proto"
+                                            class="btn-icon download" title="Télécharger le prototype">
                                             <i class="fa-solid fa-download"></i>
                                         </a>
                                     </div>
@@ -80,21 +117,30 @@
                     </div>
                 </div>
 
+                <!-- Salon V2 -->
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <span><i class="fa-solid fa-folder"></i> Salon V2</span>
+                        <div class="folder-icon"><i class="fa-solid fa-folder"></i></div>
+                        <span class="folder-name">Salon V2</span>
+                        <span class="count">1</span>
                         <i class="fa-solid fa-chevron-down arrow"></i>
                     </div>
                     <div class="accordion-content">
                         <ul>
                             <li data-tags="stable v2">
                                 <div class="version-row">
-                                    <span class="version-name">V2 Stable</span>
+                                    <div class="version-meta">
+                                        <span class="tag tag-stable"><i class="fa-solid fa-circle-check"></i>
+                                            Stable</span>
+                                        <span class="version-name">V2 — Stable</span>
+                                    </div>
                                     <div class="actions">
-                                        <button class="btn-icon view" data-src="homepage/v2/index.html" title="Voir">
+                                        <button class="btn-icon view" data-src="homepage/v2/index.html"
+                                            data-title="Salon V2 — Stable" title="Voir l'aperçu">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <a href="homepage/v2/index.html" download class="btn-icon download" title="Télécharger">
+                                        <a href="homepage/v2/index.html" download class="btn-icon download"
+                                            title="Télécharger">
                                             <i class="fa-solid fa-download"></i>
                                         </a>
                                     </div>
@@ -104,21 +150,30 @@
                     </div>
                 </div>
 
+                <!-- Salon V3 -->
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <span><i class="fa-solid fa-folder"></i> Salon V3</span>
+                        <div class="folder-icon"><i class="fa-solid fa-folder"></i></div>
+                        <span class="folder-name">Salon V3</span>
+                        <span class="count">1</span>
                         <i class="fa-solid fa-chevron-down arrow"></i>
                     </div>
                     <div class="accordion-content">
                         <ul>
                             <li data-tags="stable v3">
                                 <div class="version-row">
-                                    <span class="version-name">V3 Stable</span>
+                                    <div class="version-meta">
+                                        <span class="tag tag-stable"><i class="fa-solid fa-circle-check"></i>
+                                            Stable</span>
+                                        <span class="version-name">V3 — Stable</span>
+                                    </div>
                                     <div class="actions">
-                                        <button class="btn-icon view" data-src="homepage/v3/index.html" title="Voir">
+                                        <button class="btn-icon view" data-src="homepage/v3/index.html"
+                                            data-title="Salon V3 — Stable" title="Voir l'aperçu">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <a href="homepage/v3/index.html" download class="btn-icon download" title="Télécharger">
+                                        <a href="homepage/v3/index.html" download class="btn-icon download"
+                                            title="Télécharger">
                                             <i class="fa-solid fa-download"></i>
                                         </a>
                                     </div>
@@ -128,38 +183,79 @@
                     </div>
                 </div>
 
+            </div><!-- /project-list -->
+        </div><!-- /sidebar-content -->
+
+        <div class="sidebar-footer">
+            <div class="footer-status">
+                <span class="status-dot"></span>
+                <span>4 versions disponibles</span>
+            </div>
+            <span class="footer-copy">© 2025 Alexandre BAUDRY</span>
+        </div>
+
+    </aside>
+
+    <!-- Bouton collapse sidebar (desktop) -->
+    <button class="sidebar-collapse" id="sidebarCollapse" aria-label="Réduire/ouvrir le menu"
+        title="Réduire la sidebar">
+        <i class="fa-solid fa-angles-left"></i>
+    </button>
+
+    <!-- ══════════ MAIN ══════════ -->
+    <main class="main-area">
+
+        <!-- Topbar mobile uniquement -->
+        <div class="topbar">
+            <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="topbar-logo">Spotlight<span>Studio</span></div>
+            <div class="topbar-spacer"></div>
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state">
+            <div class="empty-icon">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h2>Aucun projet ouvert</h2>
+            <p>Sélectionnez une version dans le panneau gauche pour afficher l'aperçu ici.</p>
+            <div class="empty-hint">
+                <i class="fa-solid fa-arrow-left"></i>
+                Choisir un projet
             </div>
         </div>
 
-        <div class="sidebar-footer">
-            <p>&copy; 2025 Alexandre BAUDRY</p>
-        </div>
-    </div>
-
-    <div class="main-area">
-        <div id="empty-state">
-            <i class="fa-solid fa-laptop-code"></i>
-            <h2>Sélectionnez une version</h2>
-            <p>Choisissez un projet dans le menu de gauche pour afficher l'aperçu.</p>
-        </div>
-
+        <!-- Preview panel -->
         <div class="preview-panel" id="preview-panel">
             <div class="preview-header">
                 <div class="preview-info">
-                    <span class="badge">Live Preview</span>
-                    <span id="preview-title">Titre du projet</span>
+                    <span class="live-badge">
+                        <span class="live-dot"></span>
+                        Live Preview
+                    </span>
+                    <span id="preview-title">—</span>
                 </div>
-                <button class="close-btn" id="close-preview">
-                    <i class="fa-solid fa-xmark"></i> Fermer
-                </button>
+                <div class="preview-actions">
+                    <a id="preview-new-tab" href="#" target="_blank" class="btn btn-secondary">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>Ouvrir</span>
+                    </a>
+                    <button class="btn btn-close" id="close-preview">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span>Fermer</span>
+                    </button>
+                </div>
             </div>
             <div class="iframe-container">
-                <iframe src=""></iframe>
+                <iframe id="preview-iframe" src="" title="Aperçu du projet"></iframe>
             </div>
         </div>
-    </div>
 
-    <script src="assets/js/script.js"></script>
+    </main>
 
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
