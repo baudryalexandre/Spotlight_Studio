@@ -1,0 +1,67 @@
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .topbar {
+        display: flex;
+    }
+
+    .sidebar-close {
+        display: block;
+    }
+
+    .sidebar-collapse {
+        display: none !important;
+    }
+
+    .sidebar-expand-btn {
+        display: none !important;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        box-shadow: 6px 0 50px rgba(0, 0, 0, .28);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .iframe-container {
+        padding: 12px;
+    }
+
+    .preview-header {
+        padding: 11px 14px;
+    }
+
+    .empty-hint {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --sidebar-w: 285px;
+    }
+
+    .btn-secondary {
+        display: none;
+    }
+
+    #preview-title {
+        font-size: 12.5px;
+    }
+
+    .iframe-container {
+        padding: 8px;
+    }
+
+    .preview-panel iframe {
+        border-radius: 8px;
+    }
+}

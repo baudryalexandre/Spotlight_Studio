@@ -1,0 +1,29 @@
+
+/* Tags */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    letter-spacing: .02em;
+}
+
+.tag i {
+    font-size: 9px;
+}
+
+.tag-stable {
+    background: rgba(16, 185, 129, .14);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, .2);
+}
+
+.tag-proto {
+    background: rgba(245, 158, 11, .13);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, .2);
+}

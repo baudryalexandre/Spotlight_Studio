@@ -1,0 +1,58 @@
+
+/* ── Filter label ── */
+.filter-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: #3a5845;
+    font-weight: 600;
+    margin-bottom: 7px;
+    padding: 0 2px;
+}
+
+/* ── Filters ── */
+.filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.filter-chip {
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-chip input {
+    display: none;
+}
+
+.filter-chip span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    background: var(--sidebar-bg2);
+    border: 1px solid var(--border-dark);
+    border-radius: 20px;
+    color: var(--text-side);
+    font-size: 11.5px;
+    font-weight: 500;
+    transition: all var(--t);
+}
+
+.filter-chip span i {
+    font-size: 10px;
+}
+
+.filter-chip span:hover {
+    border-color: var(--accent);
+    color: var(--text-side-hi);
+}
+
+.filter-chip input:checked+span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(39, 174, 114, .28);
+}

@@ -1,0 +1,83 @@
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+
+@import url("header.css");
+@import url("button.css");
+@import url("search.css");
+@import url("filter.css");
+@import url("accordion.css");
+@import url("version.css");
+@import url("tag.css");
+@import url("footer.css");
+
+.sidebar {
+    width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 100;
+    transition: transform var(--t), width .28s cubic-bezier(.4, 0, .2, 1);
+    /* Subtle texture */
+    background-image:
+        radial-gradient(ellipse at 0% 0%, rgba(39, 174, 114, .06) 0%, transparent 60%),
+        radial-gradient(ellipse at 100% 100%, rgba(39, 174, 114, .04) 0%, transparent 50%);
+}
+
+/* ── État collapsé (desktop) ── */
+.sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+    border: none;
+}
+
+.sidebar.collapsed~.sidebar-collapse {
+    left: 0px;
+}
+
+.sidebar.collapsed~.sidebar-collapse i {
+    transform: rotate(180deg);
+}
+
+/* ── Content ── */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-mid) transparent;
+    transition: opacity .18s ease;
+}
+
+.sidebar-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: var(--border-mid);
+    border-radius: 4px;
+}
+
+/* ── Divider ── */
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--border-dark), transparent);
+    margin: 2px 0 14px;
+}
+
+/* ── Section label ── */
+.section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: #3a5845;
+    font-weight: 600;
+    padding: 0 2px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

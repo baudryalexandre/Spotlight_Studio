@@ -1,0 +1,103 @@
+
+/* ── Bouton collapse fixe (desktop only) ── */
+.sidebar-collapse {
+    position: fixed;
+    left: calc(var(--sidebar-w) - 14px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+    background: var(--sidebar-bg2);
+    border: 1px solid var(--border-mid);
+    border-radius: 8px;
+    color: var(--text-side);
+    font-size: 12px;
+    cursor: pointer;
+    width: 26px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left .28s cubic-bezier(.4, 0, .2, 1), background var(--t), color var(--t), border-color var(--t);
+    box-shadow: var(--shadow-md);
+}
+
+.sidebar-collapse:hover {
+    color: #fff;
+    background: var(--sidebar-bg3);
+    border-color: var(--accent);
+}
+
+.sidebar-collapse i {
+    transition: transform .28s ease;
+}
+
+@keyframes blink-btn {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(39, 174, 114, 0);
+        background: var(--sidebar-bg2);
+        border-color: var(--border-mid);
+        color: var(--text-side);
+    }
+
+    50% {
+        box-shadow: 0 0 12px 4px rgba(39, 174, 114, 0.35);
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+    }
+}
+
+.sidebar.collapsed~.sidebar-collapse {
+    animation: blink-btn 1.4s ease-in-out infinite;
+}
+
+
+/* ── Action buttons ── */
+.actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--border-mid);
+    color: #3d5e4a;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 11px;
+    text-decoration: none;
+    transition: all var(--t);
+    flex-shrink: 0;
+}
+
+.btn-icon:hover {
+    color: #fff;
+    border-color: #2d5a3a;
+    background: var(--sidebar-bg3);
+}
+
+.btn-icon.view:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+}
+
+.btn-icon.external:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(59, 130, 246, .1);
+}
+
+.btn-icon.download:hover {
+    border-color: var(--success);
+    color: var(--success);
+    background: rgba(16, 185, 129, .1);
+}
