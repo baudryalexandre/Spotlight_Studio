@@ -1,86 +1,77 @@
-# .github/workflows/update-topics.yml
 name: Update Topics
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   update-topics:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Detect frameworks & tools
         id: detect
         run: |
           TOPICS=""
-
-          # --- Front-end frameworks & libraries ---
-          grep -q '"react"' package.json && TOPICS="$TOPICS,React"
-          grep -q '"vue"' package.json && TOPICS="$TOPICS,Vue.js"
-          grep -q '"tailwindcss"' package.json && TOPICS="$TOPICS,TailwindCSS"
-          grep -q '"bootstrap"' package.json && TOPICS="$TOPICS,Bootstrap"
-
-          # --- Back-end frameworks & tools ---
-          grep -q '"express"' package.json && TOPICS="$TOPICS,Express"
-          grep -q '"django"' requirements.txt && TOPICS="$TOPICS,Django"
-          grep -q '"flask"' requirements.txt && TOPICS="$TOPICS,Flask"
-          grep -q '"laravel"' composer.json && TOPICS="$TOPICS,Laravel"
-          grep -q '"jwt"' package.json && TOPICS="$TOPICS,JWT"
-          grep -q '"rest"' package.json && TOPICS="$TOPICS,API-REST"
-
+          # --- Front-end ---
+          [ -f package.json ] && grep -q '"react"' package.json && TOPICS="$TOPICS,react"
+          [ -f package.json ] && grep -q '"vue"' package.json && TOPICS="$TOPICS,vue"
+          [ -f package.json ] && grep -q '"tailwindcss"' package.json && TOPICS="$TOPICS,tailwindcss"
+          [ -f package.json ] && grep -q '"bootstrap"' package.json && TOPICS="$TOPICS,bootstrap"
+          # --- Back-end JS ---
+          [ -f package.json ] && grep -q '"express"' package.json && TOPICS="$TOPICS,express"
+          grep -rl 'emailjs' . --include="*.js" --include="*.html" > /dev/null 2>&1 && TOPICS="$TOPICS,emailjs"
+          # --- Web APIs ---
+          grep -rl 'localStorage' . --include="*.js" > /dev/null 2>&1 && TOPICS="$TOPICS,localstorage"
+          # --- Back-end Python ---
+          [ -f requirements.txt ] && grep -qi 'django' requirements.txt && TOPICS="$TOPICS,django"
+          [ -f requirements.txt ] && grep -qi 'flask' requirements.txt && TOPICS="$TOPICS,flask"
+          grep -rl 'from flask\|import flask' . --include="*.py" > /dev/null 2>&1 && TOPICS="$TOPICS,flask"
+          # --- Back-end PHP ---
+          [ -f composer.json ] && grep -q 'laravel' composer.json && TOPICS="$TOPICS,laravel"
+          # --- Back-end Go ---
+          grep -rl 'net/http' . --include="*.go" > /dev/null 2>&1 && TOPICS="$TOPICS,rest-api"
+          grep -rl 'html/template\|text/template' . --include="*.go" > /dev/null 2>&1 && TOPICS="$TOPICS,html-template"
+          # --- ES Modules ---
+          grep -rl 'type="module"' . --include="*.html" > /dev/null 2>&1 && TOPICS="$TOPICS,es-modules"
+          # --- JSON data ---
+          ls *.json > /dev/null 2>&1 && TOPICS="$TOPICS,json"
           # --- Databases ---
-          grep -q '"sqlite3"' package.json && TOPICS="$TOPICS,SQLite"
-          grep -q '"pg"' package.json && TOPICS="$TOPICS,PostgreSQL"
-          grep -q '"mysql"' package.json && TOPICS="$TOPICS,MySQL"
-          grep -q '"mongodb"' package.json && TOPICS="$TOPICS,MongoDB"
-
+          [ -f package.json ] && grep -q '"sqlite3"' package.json && TOPICS="$TOPICS,sqlite"
+          ls *.db > /dev/null 2>&1 && TOPICS="$TOPICS,sqlite"
+          [ -f package.json ] && grep -q '"pg"' package.json && TOPICS="$TOPICS,postgresql"
+          [ -f package.json ] && grep -q '"mysql"' package.json && TOPICS="$TOPICS,mysql"
+          [ -f package.json ] && grep -q '"mongodb"' package.json && TOPICS="$TOPICS,mongodb"
           # --- Data & AI ---
-          [ -f requirements.txt ] && grep -q 'numpy' requirements.txt && TOPICS="$TOPICS,NumPy"
-          [ -f requirements.txt ] && grep -q 'pandas' requirements.txt && TOPICS="$TOPICS,Pandas"
-          [ -f requirements.txt ] && grep -q 'tensorflow' requirements.txt && TOPICS="$TOPICS,TensorFlow"
-          [ -f requirements.txt ] && grep -q 'pytorch' requirements.txt && TOPICS="$TOPICS,PyTorch"
-          [ -f requirements.txt ] && grep -q 'scikit-learn' requirements.txt && TOPICS="$TOPICS,Scikit-learn"
-          [ -f requirements.txt ] && grep -q 'keras' requirements.txt && TOPICS="$TOPICS,Keras"
-          [ -f requirements.txt ] && grep -q 'matplotlib' requirements.txt && TOPICS="$TOPICS,Matplotlib"
-          [ -f requirements.txt ] && grep -q 'seaborn' requirements.txt && TOPICS="$TOPICS,Seaborn"
-          [ -f requirements.txt ] && grep -q 'xgboost' requirements.txt && TOPICS="$TOPICS,XGBoost"
-          [ -f requirements.txt ] && grep -q 'nltk' requirements.txt && TOPICS="$TOPICS,NLTK"
-          [ -f requirements.txt ] && grep -q 'transformers' requirements.txt && TOPICS="$TOPICS,HuggingFace-Transformers"
-          [ -f requirements.txt ] && grep -q 'scipy' requirements.txt && TOPICS="$TOPICS,SciPy"
-
+          if [ -f requirements.txt ]; then
+            for pkg in numpy pandas tensorflow pytorch scikit-learn keras matplotlib seaborn xgboost nltk transformers scipy; do
+              grep -qi "$pkg" requirements.txt && TOPICS="$TOPICS,$pkg"
+            done
+          fi
+          # --- GUI & Graphique ---
+          [ -f Cargo.toml ] && grep -q 'sdl2' Cargo.toml && TOPICS="$TOPICS,sdl2"
+          [ -f Cargo.toml ] && grep -q 'raylib' Cargo.toml && TOPICS="$TOPICS,raylib"
+          grep -rl 'import tkinter\|from tkinter' . --include="*.py" > /dev/null 2>&1 && TOPICS="$TOPICS,tkinter"
+          grep -rl 'import pygame\|from pygame' . --include="*.py" > /dev/null 2>&1 && TOPICS="$TOPICS,pygame"
           # --- DevOps & Cloud ---
-          grep -q 'docker' Dockerfile && TOPICS="$TOPICS,Docker"
-          grep -q 'kubernetes' README.md && TOPICS="$TOPICS,Kubernetes"
-          grep -q 'aws' README.md && TOPICS="$TOPICS,AWS"
-          grep -q 'terraform' README.md && TOPICS="$TOPICS,Terraform"
-          grep -q 'ci/cd' README.md && TOPICS="$TOPICS,CI/CD"
-
-          # --- Systems & Tools ---
-          grep -q 'n8n' README.md && TOPICS="$TOPICS,n8n"
-          grep -q 'Notion' README.md && TOPICS="$TOPICS,Notion"
-          grep -q 'Figma' README.md && TOPICS="$TOPICS,Figma"
-          grep -q 'Trello' README.md && TOPICS="$TOPICS,Trello"
-          grep -q 'Excel' README.md && TOPICS="$TOPICS,Excel"
-          grep -q 'Word' README.md && TOPICS="$TOPICS,Word"
-          grep -q 'Canva' README.md && TOPICS="$TOPICS,Canva"
-          grep -q 'PowerPoint' README.md && TOPICS="$TOPICS,PowerPoint"
-
-          # Nettoyage
-          TOPICS=$(echo $TOPICS | sed 's/^,//; s/,,/,/g')
+          [ -f Dockerfile ] && TOPICS="$TOPICS,docker"
+          [ -f README.md ] && grep -qi 'kubernetes' README.md && TOPICS="$TOPICS,kubernetes"
+          [ -f README.md ] && grep -qi 'terraform' README.md && TOPICS="$TOPICS,terraform"
+          # --- Nettoyage et normalisation ---
+          TOPICS=$(echo "$TOPICS" | tr ',' '\n' | sed '/^\s*$/d' | tr '[:upper:]' '[:lower:]' | sed 's#[ /]#-#g' | cut -c1-50 | sort -u | tr '\n' ',' | sed 's/,$//')
           echo "TOPICS=$TOPICS" >> $GITHUB_ENV
-
       - name: Set repository topics
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PAT_GITHUB }}
           script: |
-            const topics = process.env.TOPICS.split(',').map(t => t.trim());
-            await github.rest.repos.replaceAllTopics({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              names: topics
-            });
+            const topics = process.env.TOPICS.split(',').filter(t => t);
+            if (topics.length > 0) {
+              await github.rest.repos.replaceAllTopics({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                names: topics
+              });
+            } else {
+              console.log("Aucun topic valide détecté, skip update");
+            }
