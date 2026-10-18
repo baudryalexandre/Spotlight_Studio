@@ -1,5 +1,42 @@
+/* ══════════════════════════════════════════
+   VERSION LIST — FOCUS MODE (Dimming)
+══════════════════════════════════════════ */
 
-/* ── Version row ── */
+/* Items (versions) estompés */
+.project-list li[data-tags].dimmed {
+    opacity: 0.25 !important;
+    pointer-events: none !important;
+    filter: grayscale(100%) !important;
+    transition: opacity 0.3s ease, filter 0.3s ease !important;
+}
+
+/* En-têtes d'accordéon estompés */
+.accordion-item.dimmed .accordion-header {
+    opacity: 0.25 !important;
+    pointer-events: none !important;
+    filter: grayscale(100%) !important;
+    transition: opacity 0.3s ease, filter 0.3s ease !important;
+    cursor: not-allowed !important;
+}
+
+/* Désactive les hover */
+.project-list li[data-tags].dimmed .version-row:hover {
+    background: transparent !important;
+}
+
+.project-list li[data-tags].dimmed .version-name {
+    color: var(--text-side) !important;
+}
+
+.project-list li[data-tags].dimmed .btn-icon {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+}
+
+/* ══════════════════════════════════════════
+   VERSION ROW
+══════════════════════════════════════════ */
+
 .version-row {
     display: flex;
     justify-content: space-between;
@@ -13,6 +50,16 @@
 .version-row:hover {
     background: rgba(255, 255, 255, .04);
 }
+
+/* Désactive le hover visuel quand l'élément est dimmed */
+li[data-tags].dimmed .version-row:hover {
+    background: transparent;
+}
+
+
+/* ══════════════════════════════════════════
+   VERSION META & NAME
+══════════════════════════════════════════ */
 
 .version-meta {
     display: flex;
@@ -32,4 +79,9 @@
 
 .version-row:hover .version-name {
     color: var(--text-side-hi);
+}
+
+/* Désactive le changement de couleur du texte quand dimmed */
+li[data-tags].dimmed .version-row:hover .version-name {
+    color: var(--text-side);
 }
